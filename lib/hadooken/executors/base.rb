@@ -15,10 +15,9 @@ module Hadooken
 
       private
         def dispatch(message)
-          consumer_of(message.topic).perform(message.value, message.topic)
+          consumer_of(message.topic).perform(message.value, message.topic, fail_fast)
         rescue => e
           Util.capture_error(e, payload: message.value)
-          exit(1) if Hadooken.configuration.fail_fast
         ensure
           release_resources
         end

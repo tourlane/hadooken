@@ -16,7 +16,7 @@ module Hadooken
     class << self
       # By overriding this method you can get the raw
       # json payload and work on your own.
-      def perform(payload, topic)
+      def perform(payload, topic, fail_fast)
         time = Benchmark.realtime do
           hash = JSON.parse(payload).deep_symbolize_keys
 
@@ -28,6 +28,7 @@ module Hadooken
         put_log("Payload consumed in #{m_seconds}", :debug)
       rescue => e
         Util.capture_error(e, payload: payload)
+        exit(1) if fail_fast
       end
 
       # By overriding this method you can use the legacy
