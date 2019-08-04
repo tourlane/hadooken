@@ -1,11 +1,12 @@
 module Hadooken
   module Executors
     class Base
-      attr_reader :topics
+      attr_reader :topics, :fail_fast
 
-      def initialize(topics)
+      def initialize(topics, fail_fast)
         @topics = topics
         @consumer_lookup = {}
+        @fail_fast = fail_fast
       end
 
       def shutdown
@@ -17,6 +18,7 @@ module Hadooken
           consumer_of(message.topic).perform(message.value, message.topic)
         rescue => e
           Util.capture_error(e, payload: message.value)
+          exit(1) if Hadooken.configuration.fail_fast
         ensure
           release_resources
         end

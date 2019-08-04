@@ -3,9 +3,10 @@ module Hadooken
     class MultiThread < Base
       DEFAULT_THREAD_COUNT = 16
 
-      def initialize(topics, threads)
+      def initialize(topics, threads, fail_fast)
         super(topics)
         @threads = threads
+        @fail_fast = fail_fast
       end
 
       def execute(message)
