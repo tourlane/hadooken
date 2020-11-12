@@ -74,7 +74,7 @@ Configurable options via configuration yml file:
       - **value<String>:** Name of the consumer class
 - **kafka<Dictionary>:**
   - **client:** The client library to be used to connect Kafka. Default is Kafka.
-  - **brokers:** An array of brookers list.
+  - parameters valid for [zendesk/ruby-kafka client](https://github.com/zendesk/ruby-kafka/blob/v1.3.0/lib/kafka/client.rb#L78)
 - **test<Dictionary>:**
   - **schema_path:** The path of the JSON schema files.
 - **require_env<String>:** Custom path to require.

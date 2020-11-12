@@ -47,7 +47,7 @@ module Hadooken
   end
 
   def self.kafka_client
-    @kafka_client ||= configuration.kafka[:client].new(seed_brokers: configuration.kafka[:brokers])
+    @kafka_client ||= configuration.kafka[:client].new(configuration.kafka.except(:client))
   end
 
   def self.producer

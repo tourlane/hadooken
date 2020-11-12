@@ -7,5 +7,5 @@ development:
   topics:
     sample: ClassName
   kafka:
-    brokers:
+    seed_brokers:
       - localhost:9092
